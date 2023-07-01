@@ -20,7 +20,7 @@ export default function RootLayout({
         <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
           <Button text={'Menu1'} buttonIndex={1} />
           <Button text={'Menu2'} buttonIndex={2} />
-          <Button text={'Menu3'} buttonIndex={3} />
+          <Button text={'ZOOM test'} buttonIndex={3} />
           <Button text={'Plugin'} buttonIndex={4} />
         </div>
         {children}
