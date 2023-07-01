@@ -1,18 +1,27 @@
 'use client';
 
 import React from 'react'
-import ZoomMtgEmbedded from "@zoomus/websdk/embedded"
+// import ZoomMtgEmbedded from "@zoomus/websdk/embedded"
 import axios from 'axios';
 
 export default function Menu3() {
   console.log('menu3');
-  const client = ZoomMtgEmbedded.createClient();
+  // const [client, setClient] = React.useState<any>(null);
 
-  React.useEffect(() => {
-    let meetingSDKElement = document.getElementById('meetingSDKElement');
-    client.init({ zoomAppRoot: meetingSDKElement!, language: 'en-US' });
+  const dynamicImport = async () => {
+    const ZoomMtgEmbedded = (await import('@zoomus/websdk/embedded')).default;
+    const client = ZoomMtgEmbedded.createClient();
+    return client;
+    // console.log('dynamicImport');
+  }
 
-  }, []);
+  // React.useEffect(() => {
+  //   if (client) {
+  //     let meetingSDKElement = document.getElementById('meetingSDKElement');
+  //     client.init({ zoomAppRoot: meetingSDKElement!, language: 'en-US' });
+  //   }
+
+  // }, [client]);
 
   async function getSignature(meetingNumber: any, role: any) {
     try {
@@ -28,6 +37,10 @@ export default function Menu3() {
   }
 
   async function join() {
+    const client = await dynamicImport();
+    const meetingSDKElement = document.getElementById('meetingSDKElement');
+    client.init({ zoomAppRoot: meetingSDKElement!, language: 'en-US' });
+
     const { signature, sdkKey } = await getSignature('82505925747', 0);
 
     client.join({
