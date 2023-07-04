@@ -3,8 +3,10 @@
 import React from 'react'
 // import ZoomMtgEmbedded from "@zoomus/websdk/embedded"
 import axios from 'axios';
+import { SuspensionViewType } from '@zoomus/websdk/embedded';
 
 export default function Menu3() {
+  const [error, setError] = React.useState<string>('');
   console.log('menu3');
   // const [client, setClient] = React.useState<any>(null);
 
@@ -36,30 +38,71 @@ export default function Menu3() {
     }
   }
 
-  async function join() {
-    const client = await dynamicImport();
-    const meetingSDKElement = document.getElementById('meetingSDKElement');
-    client.init({ zoomAppRoot: meetingSDKElement!, language: 'en-US' });
+  async function join(role = 0) {
+    try {
+      const client = await dynamicImport();
+      const meetingSDKElement = document.getElementById('meetingSDKElement');
+      client.init({
+        zoomAppRoot: meetingSDKElement!,
+        language: 'en-US',
+        customize: {
+          video: {
+            defaultViewType: 'gallery' as SuspensionViewType,
+            viewSizes: {
+              default: {
+                width: 640,
+                height: 360,
+              },
+              ribbon: {
+                width: 640,
+                height: 360,
+              },
+            }
+          }
+        }
+      });
 
-    const { signature, sdkKey } = await getSignature('82505925747', 0);
+      const { signature, sdkKey } = await getSignature('82505925747', role);
 
-    client.join({
-      sdkKey: sdkKey,
-      signature: signature,
-      meetingNumber: '82505925747',
-      password: 'k4esLr',
-      userName: 'nunonam',
-      tk: '',
-    });
+
+
+      client.join({
+        sdkKey: sdkKey,
+        signature: signature,
+        meetingNumber: '82505925747',
+        password: 'k4esLr',
+        userName: 'nunonam',
+        tk: '',
+        zak: '',
+      });
+    } catch (error) {
+      setError('Error joining meeting');
+      console.log(error);
+    }
   }
 
   return (
-    <div className="pt-40 text-center">
-      <button
-        onClick={() => join()}
-      >
-        Join Meeting
-      </button>
+    <div className="container">
+      <div className="flex flex-row justify-center gap-4 py-4">
+        <button
+          className="rounded-full bg-blue-500 text-white px-4 py-2"
+          onClick={() => join(0)}
+        >
+          Join Meeting
+        </button>
+        <button
+          className="rounded-full bg-gray-500 text-white px-4 py-2"
+          onClick={() => join(1)}
+          disabled={true}
+        >
+          Start Meeting
+        </button>
+      </div>
+      {!!error && (
+        <div className="px-4 py-3 leading-normal text-red-100 bg-red-700 rounded-lg" role="alert">
+          <p>{error}</p>
+        </div>
+      )}
       <div id="meetingSDKElement">
 
       </div>

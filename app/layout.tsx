@@ -17,11 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} suppressHydrationWarning={true} >
-        <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
+        <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left border-b border-gray-700">
           <Button text={'Menu1'} buttonIndex={1} />
           <Button text={'Menu2'} buttonIndex={2} />
           <Button text={'ZOOM test'} buttonIndex={3} />
-          <Button text={'Plugin'} buttonIndex={4} />
+          <Button text={'Plugin test'} buttonIndex={4} />
         </div>
         {children}
       </body>

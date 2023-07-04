@@ -1,3 +1,4 @@
+import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
 export default function handler(req: any, res: any) {
@@ -15,6 +16,10 @@ export default function handler(req: any, res: any) {
     iat: iat,
     exp: Math.floor(Date.now() / 1000) + (60 * 60),
   }), process.env.ZOOM_CLIENT_SECRET!, { header: { alg: 'HS256', typ: 'JWT' } });
+
+  // await axios.get(`https://api.zoom.us/v2/users/{userId}/token?type=zak`)
+
+
 
   res.status(200).json({
     signature: signature,
