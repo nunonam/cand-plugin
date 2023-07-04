@@ -73,8 +73,7 @@ export default function Menu3() {
         meetingNumber: '82505925747',
         password: 'k4esLr',
         userName: 'nunonam',
-        tk: '',
-        zak: '',
+        tk: ''
       });
     } catch (error) {
       setError('Error joining meeting');

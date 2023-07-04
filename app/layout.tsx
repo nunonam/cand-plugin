@@ -16,10 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/* <head>
-        <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.13.0/css/bootstrap.css" />
-        <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.13.0/css/react-select.css" />
-      </head> */}
+      <head>
+        <meta httpEquiv="origin-trial" content="AmhyeqeHcnPBoTsGjB3qwJvuig12W9Sf2vDN8p++bX/va1flM0BrD1PRDR6F+5v2UOvJ8eMnPJKKHG47pt91WAMAAABgeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjMwMDAiLCJmZWF0dXJlIjoiVW5yZXN0cmljdGVkU2hhcmVkQXJyYXlCdWZmZXIiLCJleHBpcnkiOjE3MDk4NTU5OTl9" />
+        <meta httpEquiv="origin-trial" content="Ajwp8BrPKY3nLguXLsMgkBTI9PYxwQJEc+YOePRhumqaf9s82nZizHnhXP3lWFryvE67ejntEoojg5Nx75eOnAwAAAB9eyJvcmlnaW4iOiJodHRwczovL2NhbmQtcGx1Z2luLTA0Yzc2YTAxZmMyMy5oZXJva3VhcHAuY29tOjQ0MyIsImZlYXR1cmUiOiJVbnJlc3RyaWN0ZWRTaGFyZWRBcnJheUJ1ZmZlciIsImV4cGlyeSI6MTcwOTg1NTk5OX0=" />
+        {/* <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.13.0/css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.13.0/css/react-select.css" /> */}
+      </head>
       <body className={inter.className} suppressHydrationWarning={true} >
         <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left border-b border-gray-700">
           <Button text={'Menu1'} buttonIndex={1} />
