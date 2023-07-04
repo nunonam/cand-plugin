@@ -130,15 +130,15 @@ export default function Menu3() {
           className="rounded-full bg-blue-500 text-white px-4 py-2"
           onClick={() => join(0)}
         >
-          Join Meeting as Component
+          Join Meeting
         </button>
-        <button
+        {/* <button
           className="rounded-full bg-blue-500 text-white px-4 py-2"
           onClick={() => join(0)}
           disabled={true}
         >
           Join Meeting as Full Screen
-        </button>
+        </button> */}
         <button
           className="rounded-full bg-gray-500 text-white px-4 py-2"
           onClick={() => join(1)}
