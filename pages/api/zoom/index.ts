@@ -20,6 +20,8 @@ export default function handler(req: any, res: any) {
   // await axios.get(`https://api.zoom.us/v2/users/{userId}/token?type=zak`)
 
 
+  res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
 
   res.status(200).json({
     signature: signature,

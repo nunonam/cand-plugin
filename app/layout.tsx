@@ -16,6 +16,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      {/* <head>
+        <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.13.0/css/bootstrap.css" />
+        <link type="text/css" rel="stylesheet" href="https://source.zoom.us/2.13.0/css/react-select.css" />
+      </head> */}
       <body className={inter.className} suppressHydrationWarning={true} >
         <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left border-b border-gray-700">
           <Button text={'Menu1'} buttonIndex={1} />

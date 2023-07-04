@@ -4,18 +4,12 @@ import React from 'react'
 // import ZoomMtgEmbedded from "@zoomus/websdk/embedded"
 import axios from 'axios';
 import { SuspensionViewType } from '@zoomus/websdk/embedded';
+import { ZoomMtg } from '@zoomus/websdk';
 
 export default function Menu3() {
   const [error, setError] = React.useState<string>('');
   console.log('menu3');
   // const [client, setClient] = React.useState<any>(null);
-
-  const dynamicImport = async () => {
-    const ZoomMtgEmbedded = (await import('@zoomus/websdk/embedded')).default;
-    const client = ZoomMtgEmbedded.createClient();
-    return client;
-    // console.log('dynamicImport');
-  }
 
   // React.useEffect(() => {
   //   if (client) {
@@ -24,6 +18,13 @@ export default function Menu3() {
   //   }
 
   // }, [client]);
+
+  const dynamicImport = async () => {
+    const ZoomMtgEmbedded = (await import('@zoomus/websdk/embedded')).default;
+    const client = ZoomMtgEmbedded.createClient();
+    return client;
+    // console.log('dynamicImport');
+  }
 
   async function getSignature(meetingNumber: any, role: any) {
     try {
@@ -81,6 +82,48 @@ export default function Menu3() {
     }
   }
 
+  async function joinFull() {
+    try {
+      ZoomMtg.setZoomJSLib('https://source.zoom.us/2.13.0/lib', '/av')
+      // loads WebAssembly assets
+      ZoomMtg.preLoadWasm()
+      ZoomMtg.prepareWebSDK()
+      // loads language files, also passes any error messages to the ui
+      ZoomMtg.i18n.load('en-US')
+      ZoomMtg.i18n.reload('en-US')
+
+      ZoomMtg.init({
+        leaveUrl: 'http://www.zoom.us',
+        success: async (success: any) => {
+          console.log(success)
+
+          const { signature, sdkKey } = await getSignature('82505925747', 0);
+
+          ZoomMtg.join({
+            signature: signature,
+            meetingNumber: '82505925747',
+            userName: 'nunonam',
+            sdkKey: sdkKey,
+            passWord: 'k4esLr',
+            success: (success: any) => {
+              console.log(success)
+            },
+            error: (error: any) => {
+              console.log(error)
+            }
+          })
+
+        },
+        error: (error: any) => {
+          console.log(error)
+        }
+      })
+    } catch (error) {
+      setError('Error joining meeting');
+      console.log(error);
+    }
+  }
+
   return (
     <div className="container">
       <div className="flex flex-row justify-center gap-4 py-4">
@@ -88,7 +131,13 @@ export default function Menu3() {
           className="rounded-full bg-blue-500 text-white px-4 py-2"
           onClick={() => join(0)}
         >
-          Join Meeting
+          Join Meeting as Component
+        </button>
+        <button
+          className="rounded-full bg-blue-500 text-white px-4 py-2"
+          onClick={() => joinFull()}
+        >
+          Join Meeting as Full Screen
         </button>
         <button
           className="rounded-full bg-gray-500 text-white px-4 py-2"
@@ -103,6 +152,9 @@ export default function Menu3() {
           <p>{error}</p>
         </div>
       )}
+      {/* <div id="zmmtg-root"></div>
+      <div id="aria-notify-area"></div> */}
+
       <div id="meetingSDKElement">
 
       </div>
