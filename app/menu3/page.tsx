@@ -4,7 +4,7 @@ import React from 'react'
 // import ZoomMtgEmbedded from "@zoomus/websdk/embedded"
 import axios from 'axios';
 import { SuspensionViewType } from '@zoomus/websdk/embedded';
-import { ZoomMtg } from '@zoomus/websdk';
+// import { ZoomMtg } from '@zoomus/websdk';
 
 export default function Menu3() {
   const [error, setError] = React.useState<string>('');
@@ -82,47 +82,47 @@ export default function Menu3() {
     }
   }
 
-  async function joinFull() {
-    try {
-      ZoomMtg.setZoomJSLib('https://source.zoom.us/2.13.0/lib', '/av')
-      // loads WebAssembly assets
-      ZoomMtg.preLoadWasm()
-      ZoomMtg.prepareWebSDK()
-      // loads language files, also passes any error messages to the ui
-      ZoomMtg.i18n.load('en-US')
-      ZoomMtg.i18n.reload('en-US')
+  // async function joinFull() {
+  //   try {
+  //     ZoomMtg.setZoomJSLib('https://source.zoom.us/2.13.0/lib', '/av')
+  //     // loads WebAssembly assets
+  //     ZoomMtg.preLoadWasm()
+  //     ZoomMtg.prepareWebSDK()
+  //     // loads language files, also passes any error messages to the ui
+  //     ZoomMtg.i18n.load('en-US')
+  //     ZoomMtg.i18n.reload('en-US')
 
-      ZoomMtg.init({
-        leaveUrl: 'http://www.zoom.us',
-        success: async (success: any) => {
-          console.log(success)
+  //     ZoomMtg.init({
+  //       leaveUrl: 'http://www.zoom.us',
+  //       success: async (success: any) => {
+  //         console.log(success)
 
-          const { signature, sdkKey } = await getSignature('82505925747', 0);
+  //         const { signature, sdkKey } = await getSignature('82505925747', 0);
 
-          ZoomMtg.join({
-            signature: signature,
-            meetingNumber: '82505925747',
-            userName: 'nunonam',
-            sdkKey: sdkKey,
-            passWord: 'k4esLr',
-            success: (success: any) => {
-              console.log(success)
-            },
-            error: (error: any) => {
-              console.log(error)
-            }
-          })
+  //         ZoomMtg.join({
+  //           signature: signature,
+  //           meetingNumber: '82505925747',
+  //           userName: 'nunonam',
+  //           sdkKey: sdkKey,
+  //           passWord: 'k4esLr',
+  //           success: (success: any) => {
+  //             console.log(success)
+  //           },
+  //           error: (error: any) => {
+  //             console.log(error)
+  //           }
+  //         })
 
-        },
-        error: (error: any) => {
-          console.log(error)
-        }
-      })
-    } catch (error) {
-      setError('Error joining meeting');
-      console.log(error);
-    }
-  }
+  //       },
+  //       error: (error: any) => {
+  //         console.log(error)
+  //       }
+  //     })
+  //   } catch (error) {
+  //     setError('Error joining meeting');
+  //     console.log(error);
+  //   }
+  // }
 
   return (
     <div className="container">
@@ -135,7 +135,8 @@ export default function Menu3() {
         </button>
         <button
           className="rounded-full bg-blue-500 text-white px-4 py-2"
-          onClick={() => joinFull()}
+          onClick={() => join(0)}
+          disabled={true}
         >
           Join Meeting as Full Screen
         </button>
